@@ -1,0 +1,1096 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-vimeo/node_modules/vimeo/lib/filestreamer.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-vimeo">npmtest-vimeo (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-vimeo/node_modules/vimeo/lib/filestreamer.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">22.55% <small>(23 / 102)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 34)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 27)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">22.55% <small>(23 / 102)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-vimeo/node_modules/vimeo/lib/</a> » filestreamer.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">"use strict";
+&nbsp;
+/**
+ *   Copyright 2013 Vimeo
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+&nbsp;
+var url_module = require('url');
+var fs_module = require('fs');
+var https_module = require('https');
+var http_module = require('http');
+&nbsp;
+/**
+ * This object facilitates resumable uploading
+ * 
+ * @param {string} file_path       Path to the video file
+ * @param {string} upload_endpoint upload URL provided with an upload ticket
+ */
+var FileStreamer = module.exports = <span class="fstat-no" title="function not covered">function FileStreamer(file_path, upload_endpoint, progress_callback) {</span>
+<span class="cstat-no" title="statement not covered">	if (!file_path) {</span>
+<span class="cstat-no" title="statement not covered">		throw new Error('You must provide a file path');</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered">	if (!upload_endpoint) {</span>
+<span class="cstat-no" title="statement not covered">		throw new Error('You must provide an upload endpoint');</span>
+	}
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this._endpoint = url_module.parse(upload_endpoint);</span>
+<span class="cstat-no" title="statement not covered">	this._path = file_path;</span>
+<span class="cstat-no" title="statement not covered">	this.progress_callback = progress_callback;</span>
+}
+&nbsp;
+FileStreamer.prototype._endpoint = null;
+FileStreamer.prototype._path = null;
+FileStreamer.prototype._fd = null;
+FileStreamer.prototype._file_size = 0;
+FileStreamer.prototype.percentage = 0;
+FileStreamer.prototype.sequential = true;
+FileStreamer.prototype.progress_callback = null;
+&nbsp;
+/**
+ * Holds the user defined ready function. Do not call this outside of the library
+ */
+FileStreamer.prototype._user_ready = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">	this.ready = <span class="fstat-no" title="function not covered">function (fn) {</span></span>
+<span class="cstat-no" title="statement not covered">		fn();</span>
+	}
+};
+&nbsp;
+/**
+ * Called internally whenever the upload might be complete. 
+ * If the upload is complete it will call _user_ready, if not it will attempt to upload from where it left off.
+ *
+ * Do not call this outside of the library.
+ */
+FileStreamer.prototype._ready = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">	var _self = this;</span>
+&nbsp;
+	// If we think we are ready to complete, check with the server and see if they have the whole file
+<span class="cstat-no" title="statement not covered">	this._getNewStart(<span class="fstat-no" title="function not covered">function (err, start) {</span></span>
+<span class="cstat-no" title="statement not covered">		if (err) {</span>
+			// If the check fails, close the file and error out immediately
+<span class="cstat-no" title="statement not covered">			_self._closeFile();</span>
+<span class="cstat-no" title="statement not covered">			return _self._error(err);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if (start &gt;= _self._file_size) {</span>
+			// If the server says they have the whole file, close it and then return back to the user
+<span class="cstat-no" title="statement not covered">			_self._closeFile()</span>
+<span class="cstat-no" title="statement not covered">			_self._user_ready();</span>
+		} else {
+			// If the server does not have the whole file, upload from where we left off
+<span class="cstat-no" title="statement not covered">			_self._streamChunk(start);</span>
+		}
+	});
+};
+&nbsp;
+/**
+ * Assign a callback to be called whenever the file is done uploading.
+ * 
+ * @param  {Function} fn The ready callback
+ */
+FileStreamer.prototype.ready = <span class="fstat-no" title="function not covered">function (fn) {</span>
+<span class="cstat-no" title="statement not covered">	this._user_ready = fn;</span>
+};
+&nbsp;
+/**
+ * Holds the error callback. Do not call this outside of the library
+ * 
+ * @param  {Error} error The error that was thrown
+ * @return {[type]}       [description]
+ */
+FileStreamer.prototype._error = <span class="fstat-no" title="function not covered">function (error) {</span>
+<span class="cstat-no" title="statement not covered">	this.error = <span class="fstat-no" title="function not covered">function (fn) {</span></span>
+<span class="cstat-no" title="statement not covered">		fn(error);</span>
+	}
+};
+&nbsp;
+/**
+ * Assign a callback to be called whenever an error occurs.
+ * 
+ * @param  {Function} fn The error callback
+ */
+FileStreamer.prototype.error = <span class="fstat-no" title="function not covered">function (fn) {</span>
+<span class="cstat-no" title="statement not covered">	this._error = fn;</span>
+};
+&nbsp;
+/**
+ * Start uploading the file
+ */
+FileStreamer.prototype.upload = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">	var _self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	fs_module.stat(_self._path, <span class="fstat-no" title="function not covered">function (stat_err, stats) {</span></span>
+<span class="cstat-no" title="statement not covered">		if (stat_err) {</span>
+<span class="cstat-no" title="statement not covered">			return _self._error(stat_err);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		_self._file_size = stats.size;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		fs_module.open(_self._path, 'r', <span class="fstat-no" title="function not covered">function(open_err, fd) {</span></span>
+<span class="cstat-no" title="statement not covered">			if (open_err) {</span>
+<span class="cstat-no" title="statement not covered">				return this._error(open_err);</span>
+			}
+&nbsp;
+<span class="cstat-no" title="statement not covered">			_self._fd = fd;</span>
+<span class="cstat-no" title="statement not covered">			_self._streamChunk(0);</span>
+		});
+	});
+};
+&nbsp;
+/**
+ * Send a file chunk, starting at byte [start] and ending at the end of the file
+ * 
+ * @param  {Number} start
+ */
+FileStreamer.prototype._streamChunk = <span class="fstat-no" title="function not covered">function (start) {</span>
+<span class="cstat-no" title="statement not covered">	var _self = this;</span>
+<span class="cstat-no" title="statement not covered">	_self._putFile(start, <span class="fstat-no" title="function not covered">function (put_err, code, headers) {</span></span>
+&nbsp;
+		// Catches a rare vimeo server bug and exits out early
+<span class="cstat-no" title="statement not covered">		if (put_err &amp;&amp; code) {</span>
+<span class="cstat-no" title="statement not covered">			_self._closeFile();</span>
+<span class="cstat-no" title="statement not covered">			return _self._error(put_err);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		_self._ready();</span>
+	});
+};
+&nbsp;
+/**
+ * Make the HTTP put request sending a part of a file up to the upload server
+ * 
+ * @param  {Number}   start    The first byte of the file
+ * @param  {Function} callback A function which is called once the upload is complete, or has failed
+ */
+FileStreamer.prototype._putFile = <span class="fstat-no" title="function not covered">function (start, callback) {</span>
+<span class="cstat-no" title="statement not covered">	var _self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var file = fs_module.createReadStream(_self._path, {</span>
+		start : start
+	});
+&nbsp;
+<span class="cstat-no" title="statement not covered">	file.on('error', <span class="fstat-no" title="function not covered">function (err) {</span></span>
+<span class="cstat-no" title="statement not covered">		callback(err);</span>
+	});
+	
+<span class="cstat-no" title="statement not covered">	var uploaded_size = start || 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	file.on('data', <span class="fstat-no" title="function not covered">function(chunk) {</span></span>
+<span class="cstat-no" title="statement not covered">		uploaded_size += chunk.length || 0;</span>
+<span class="cstat-no" title="statement not covered">		if (_self.progress_callback) {</span>
+<span class="cstat-no" title="statement not covered">			_self.progress_callback(uploaded_size, _self._file_size);</span>
+		}
+	});
+	
+<span class="cstat-no" title="statement not covered">	var headers =  {</span>
+		'Content-Length' : _self._file_size,
+		'Content-Type' : 'video/mp4'
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	headers['Content-Range'] = 'bytes ' + start + '-' + _self._file_size + '/' + _self._file_size;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var req = _self._upload_endpoint_request({</span>
+		method : 'PUT',
+		headers : headers
+	}, callback);
+&nbsp;
+<span class="cstat-no" title="statement not covered">	file.pipe(req);</span>
+};
+&nbsp;
+/**
+ * Close the file
+ */
+FileStreamer.prototype._closeFile = <span class="fstat-no" title="function not covered">function () {</span>
+<span class="cstat-no" title="statement not covered">	if (this._fd) {</span>
+<span class="cstat-no" title="statement not covered">		fs_module.close(this._fd, <span class="fstat-no" title="function not covered">function (close_err) {</span></span>
+<span class="cstat-no" title="statement not covered">			if (close_err) {</span>
+<span class="cstat-no" title="statement not covered">				this._error(close_err);</span>
+			}
+		});
+<span class="cstat-no" title="statement not covered">		this._fd = null;</span>
+	}
+};
+&nbsp;
+/**
+ * Verify the file upload and determine the last most byte the server has received
+ * @param  {Function} next A callback that will be called when the check is complete, or has errored
+ */
+FileStreamer.prototype._getNewStart = <span class="fstat-no" title="function not covered">function (next) {</span>
+<span class="cstat-no" title="statement not covered">	var _self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	this._upload_endpoint_request({</span>
+		method : 'PUT',
+		headers : {
+			'Content-Range' : 'bytes */*',
+			'Content-Type' : 'application/octet-stream'
+		}
+	}, <span class="fstat-no" title="function not covered">function (err, status, headers) {</span>
+<span class="cstat-no" title="statement not covered">		if (err) {</span>
+<span class="cstat-no" title="statement not covered">			return next(err);</span>
+		}
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if (status === 308) {</span>
+<span class="cstat-no" title="statement not covered">			return next(null, parseInt(headers.range.split('-')[1]));</span>
+		} else {
+<span class="cstat-no" title="statement not covered">			return next(new Error('Invalid http status returned from range query: [' + status + ']'));</span>
+		}
+	}).end();
+};
+&nbsp;
+/**
+ * Makes an http request to the upload server, and sends the response through the callback
+ * 
+ * @param  {Object}   options  Request options, pumped into https.request(options);
+ * @param  {Function} callback Called when the upload is complete, or has failed
+ */
+FileStreamer.prototype._upload_endpoint_request = <span class="fstat-no" title="function not covered">function (options, callback) {</span>
+<span class="cstat-no" title="statement not covered">	var request_options = {</span>
+		protocol : this._endpoint.protocol,
+		host : this._endpoint.hostname,
+		port : this._endpoint.port,
+		query : this._endpoint.query,
+		headers : options.headers,
+		path : this._endpoint.path,
+		method : options.method
+	};
+&nbsp;
+<span class="cstat-no" title="statement not covered">	var client = request_options.protocol === 'https:' ? https_module : http_module;</span>
+<span class="cstat-no" title="statement not covered">	var req = client.request(request_options);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">	req.on('response', <span class="fstat-no" title="function not covered">function (res) {</span></span>
+<span class="cstat-no" title="statement not covered">		res.setEncoding('utf8');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">		var buffer = '';</span>
+<span class="cstat-no" title="statement not covered">		res.on('readable', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">			buffer += res.read();</span>
+		});
+&nbsp;
+<span class="cstat-no" title="statement not covered">		if (res.statusCode &gt; 399) {</span>
+			// failed api calls should wait for the response to end and then call the callback with an error.
+<span class="cstat-no" title="statement not covered">			res.on('end', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">				callback(new Error('[' + buffer + ']'), res.statusCode, res.headers);</span>
+			});
+		} else {
+			// successful api calls should wait for the response to end and then call the callback with the response body
+<span class="cstat-no" title="statement not covered">			res.on('end', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">				callback(null, res.statusCode, res.headers);</span>
+			});
+		}
+	});
+&nbsp;
+	// notify user of any weird connection/request errors
+<span class="cstat-no" title="statement not covered">	req.on('error', <span class="fstat-no" title="function not covered">function(e) {</span></span>
+<span class="cstat-no" title="statement not covered">		callback(e);</span>
+	});
+&nbsp;
+<span class="cstat-no" title="statement not covered">	return req;</span>
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sun Apr 23 2017 11:10:33 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
